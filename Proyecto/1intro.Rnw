@@ -1,0 +1,42 @@
+% !Rnw root = 0anteproyecto.Rnw
+
+\section{Introducción}
+
+Invertir como lo define Alexander, Sharper y Bailey, significa "sacrificar dinero actual por dinero futuro", cuando realizamos una inversión estamos colocando cierto capital de dinero para luego recibir una cantidad superior, inferior o igual a la inversión realizada. Podemos destacar dos tipos de inversiones: las que se realizan sobre activos tangibles (maquinarias, materiales, inmuebles, entre otros) o sobre activos financieros como acciones, bonos.
+
+Aunque lo que se espera sobre una inversión es que el capital que se está invirtiendo hoy, tenga un mayor valor en un tiempo futuro, no es siempre cierto porque puede que dicha inversión nos de pérdidas. En realidad el valor futuro de la inversión siempre es incierto y en base a esto se tienen que tomar decisiones adecuadas al momento de realizar la inversión para obtener los resultados que se quieren en el futuro.
+
+Como ejemplo de esto supongamos que cierta compañia necesita hacer una construcción de una ampliación de su infraestructura, además supongamos que el capital con el que cuenta no es suficiente para cubrirlo, entonces tiene que recurrir a agentes externos para levantar el capital suficiente. La inversión en la construcción de la infraestructura es claramente un inversión tangible, que seguramente será para obtener un mayor capital, ahora como la compañia no cuenta con el dinero suficiente tiene que recurrir a otros agentes, un ejemplo de estos agentes son las instituciones bancarias, las cuales prestarían dinero bajo ciertas tasas de interés, muchas veces denominados créditos bancarios, pero estos suelen ser de díficil adquisición o con tasas de interés muy altas; existe otra manera de obtener el dinero requerido, ésta es vender títulos con ciertas garantías, estos títulos son préstamos que la compañia estará dispuesta a pagar más cierto interés sobre un tiempo establecido; en esta última opción los que prestarían el dinero realizarían inversiones financieras, es decir, invertir en instrumentos financieros que pagan ciertas tasas de interés sobre tiempos establecidos.
+
+Las inversiones financieras se hacen en los mercados de capitales, estos están compuestos por entes que regulan las inversiones que se trazan en el mismo, hacen que las reglas del juego se cumplan a cabalidad, es decir, que los compromisos de pagos se realicen y de no ser así lograr penalizar a los que no cumplen.
+
+El mercado de capitales se divide en dos mercados, el mercado primario y el mercado segundario, en el mercado primario es donde se ofrecen públicamente nuevas emisiones; continuando con el ejemplo en este mercado la compañia hace la venta de títulos para obtener el capital deseado, ahora quienes adquieren dichos títulos podrían luego negociarlos y es allí donde entra el mercado segundario, en este último se hacen negociaciones y transferencias de títulos emitidos y colocados previamente en el mercado primario, este mercado es más líquido y por lo tanto más llamativo a la hora de realizar inversiones financieras.
+
+Ahora, dentro del mercado segundario podemos destacar otros mercados y estos dependerán del tiempo de maduración (tiempo en el que se paga el capital invertido más las obligaciones) de los títulos o intrumentos, podemos encontrar el mercado de dinero, el cual está compuesto principalmente por aquellos instrumentos que tienen un vencimiento menor a un año, y el mercado de bonos y obligaciones, éste está compuesto por aquellos instrumentos que tienen un vencimiento mayor a un año.
+
+Dentro de estos mercados están los intrumentos llamados bonos, los cuales son contratos que pagan intereses sobre el capital recibido de parte del suscriptor del contrato. De este modo el suscriptor, o acreedor del contrato, paga por el contrato y a cambio recibe los intereses, u otros beneficios, durante un período de tiempo definido.
+
+Cuando se conocen los pagos que se recibirán por los instrumentos, se les llama instrumentos de renta fija, fijaremos esta investigación en estos instrumentos, estos son muy llamativos porque los inversionistas pueden hacer cálculos sobre las rentabilidades que esperan en un futuro sobre el dinero invertido. Sin embargo, este hecho no quiere decir que la rentabilidad siempre será positiva, puede ser negativa (Los precios suben, bajan o se mantienen) o simplemente puede variar con respecto a lo que se espera recibir. 
+
+Centraremos nuestro estudio en inversiones que constan de varios bonos, a estos se les llama carteras o portafolios, que no es más que una combinación de varios instrumentos para producir algún efecto deseado de rentabilidad o riesgo. Una cartera de bonos es la combinación de varios bonos para producir un efecto deseado de flujo de caja o rentabilidad y con políticas definidas sobre la rentabilidad y el tiempo objetivo. Como política se pueden reinvertir los cupones en los mismos instrumentos u otros.
+
+Como en todas las inversiones, además del rendimiento el inversionista debe tomar previsiones sobre el riesgo. Como señala Miguel Mato, ``existen dos tipos de riesgos en las inversiones en instrumentos de renta fija, riesgos exógenos y endógenos".
+
+Dentro de los riesgos endógenos podemos contar con: 
+
+  - La calidad del emisor, incumplimiento de pagos, la liquidez del instrumento, los riesgos políticos, entre otros.
+
+Dentro de los riesgos exógenos tenemos:
+
+  -\textbf{El riesgo de tipos de interés}: Éste se define como la posible pérdida o ganancia de valor que puede sufrir un instrumento, provocado por las variaciones de las tasas de interés. Cuando los tipos de interés suben, los flujos futuros de una cartera se descuentan a una tasa de interés mayor, por lo cual el precio baja, en el caso de que lo tipos de interés bajen, los flujos futuros se descuentan a una tasa menor, entonces el valor actual aumenta, es decir el precio sube. A este riesgo se le suele llamar \textbf{efecto precio}.
+
+  - \textbf{El riesgo de reinversión}: Se manifiesta cuando la reinversión de los flujos (cupones o principal) no se realiza a la tasa de rendimiento del momento en el cual se compró el bono. Es decir, es el riesgo de obtener un rendimiento diferente al rendimiento al vencimiento del momento de la compra, también llamado \textbf{efecto de reinversión}.
+
+Entonces, en las carteras de renta fija tenemos estos dos riesgos, y están asociado a los cambios en las tasas de interés, comunmente llamado riesgo de interés, éste interfiere directamente en la rentabilidad esperada. Cuando se invierte en una cartera de renta fija se está esperando recibir una cantidad fija en un tiempo de especificado, y cada vez que se realiza un pago de cupón de los instrumentos se espera reinvertirlos de modo que en el horizonte fijado se consiga la rentabilidad que se espera, es una inversión dinámica, el dinero se va reinvirtiendo a medida que se va recibiendo, el riesgo que se presenta en esta situación es debido a los cambios en las tasas de interés, ya que la rentabilidad que se espera recibir se hace mediante la tasa de interés del momento de la inversión y en teoría se espera que ésta se mantenga en el tiempo de horizonte fijado, pero en la realidad esto es muy poco probable debido a muchos factores que intervienen en el mercado, entonces si las tasas de interés suben o bajan la rentabilidad esperada variaría obteniendo así una ganancia o una pérdida sobre lo invertido.
+
+Debido a que se está expuesto a estos riesgos se buscan estrategias que nos ayuden a compensarlos de manera que estos sean mínimos y las ganancias que se tengan sean las más optimas. Una forma muy usual para disminuir los riesgos asociados a estas inversiones es generar carteras de instrumentos que realicen un equilibrio entre los riesgos de interés y de reinversión.
+
+La inmunización es una estrategia pasiva, cuyo principal objetivo es anticipar una rentabilidad debido a desplazamientos en las tasas de interés, es decir, fijar un rendimiento en un horizonte fijado evaluando si hay cambios en las tasas de interés sobre el horizonte planificado. La inmunización busca compensar los efectos de precio y de reinversión debido a los cambios posibles en las tasas de interés.
+
+Queremos aplicar la técnica de inmunización de carteras basándonos en medidas como la duración, la convexidad, la medida Ñ y la medida $M^2$.
+

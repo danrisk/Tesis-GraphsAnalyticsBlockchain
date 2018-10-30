@@ -1,0 +1,30 @@
+% !Rnw root = 0anteproyecto.Rnw
+
+\newpage
+
+\section{Cronograma de trabajo}
+
+\begin{table}[htb]
+\centering
+\begin{tabular}{|l|c|c|c|c|c|c|}
+\hline
+\multicolumn{7}{|c|}{Cronograma de Trabajo} \\ \hline
+Actividad & Mes 1 & Mes 2 & Mes 3 & Mes 4 & Mes 5 & Mes 6  \\
+\hline \hline
+Recopilación bibliográfica & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\ \hline
+Recopilación de datos & \checkmark & \checkmark &  &  &  &  \\ \hline
+Estudio de desempeño y comparativo &  &  & \checkmark & \checkmark &  &  \\ \hline
+Desarrollo de la aplicación Shiny &  &  &  & \checkmark & \checkmark &  \\ \hline
+Presentación &  &  &  &  & \checkmark & \checkmark \\ \hline
+Redacción del Tomo & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark & \checkmark \\ \hline
+\end{tabular}
+\end{table}
+
+\begin{itemize}
+\item \textbf{Recopilación bibliográfica}: Consiste en la recolección de papers, artículos, libros, documentos o trabajos de grado con referencia a la Inmunización de Carteras, la aplicación y resultados.
+\item \textbf{Recopilación de datos}: Se obtendrán los datos sobre los precios de los Bonos Soberados y de PDVSA del mercado Venezolano.
+\item \textbf{Aplicación y comparación}: Se realizará la aplicación de las estrategias de inmunización a carteras compuestas con los bonos Soberanos y PDVSA, para luego comparar las más eficientes que garanticen las rentabilidades deseadas.
+\item \textbf{Desarrollo de la aplicación Shiny}: Se construira una aplicación Shiny para aplicar inmunización.
+\item \textbf{Presentación}: Elaboración de la presentación del trabajo realizado.
+\item \textbf{Redacción del Tomo}: Redacción del libro con todos los detalles del trabajo realizado.
+\end{itemize}

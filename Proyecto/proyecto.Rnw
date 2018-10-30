@@ -1,0 +1,112 @@
+\documentclass[12pt,letterpaper]{article} % Tipo de archivo y tamaÃ±o de las letras y hoja
+\usepackage[spanish]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage[T1]{fontenc}
+
+\usepackage[dvips]{graphicx} %Graficos
+\usepackage{amsfonts,amssymb,amsthm,amsmath} %Para escribir simbolos
+% Paquetes para el manejo de tablas, creaciÃ³n de filas y columnas unidas.
+\usepackage{multirow}
+\usepackage{multicol}
+
+% Control de color en tablas muy versátil.
+\usepackage[table]{xcolor}
+% Para agregar al índice las refencias
+\usepackage[nottoc,notlot,notlof]{tocbibind}
+% define el ancho del texto en la hoja
+\setlength{\textwidth}{155mm}
+% define el alto del texto en la hoja
+\setlength{\textheight}{210mm}
+% los márgenes pueden ser editador con
+\usepackage{enumerate} %Para enumerar
+\oddsidemargin=-.25cm
+
+\usepackage{float}
+\usepackage{hyperref}
+
+\hypersetup{
+    colorlinks=true,
+    linkcolor=red,
+    filecolor=red,
+    urlcolor=red,
+}
+
+\usepackage{etoolbox}
+\makeatletter
+\patchcmd{\@verbatim}
+  {\verbatim@font}
+  {\verbatim@font\small}
+  {}{}
+\makeatother
+
+\usepackage{tikz}
+\def\checkmark{\tikz\fill[scale=0.4](0,.35) -- (.25,0) -- (1,.7) -- (.25,.15) -- cycle;}
+
+\begin{document}
+\SweaveOpts{concordance=TRUE}
+
+\thispagestyle{empty}
+\thispagestyle{empty}
+
+\enlargethispage{3cm}
+
+%\vspace{-4cm}
+\pagestyle{empty}
+
+\begin{center}
+
+\begin{figure}[h]
+\begin{center}
+\includegraphics[width=3 cm,height=3 cm]{img/ucv.eps}
+\end{center}
+\end{figure}
+\vspace{1cm}
+\large
+Universidad Central de Venezuela \\
+Facultad de Ciencias\\
+Escuela de Matemáticas\\
+Postgrado en Modelos Aleatorios\\
+\end{center}
+
+\vspace{0.8cm}
+
+\begin{center}
+\large{\bf Proyecto de Trabajo de Grado de la\\ Maestría en Modelos Aleatorios}
+\end{center}
+
+\vspace{0.8cm}
+
+\begin{center}
+\large{\bf Estudiar y Aplicar los métodos de Inmunización al riesgo de tasas de interés y reinversión a las Carteras de Bonos de Venezuela}
+\end{center}
+
+
+\vspace{1.2cm}
+
+\begin{center}
+\parbox{11.5 cm}{
+\begin{center}
+A ser desarrollado por: \\
+Lic. Daysi L. Febles R.\\
+C.I. 19.410.444 \\
+Tutor:\\
+Dr. Rafael León.
+\end{center} }
+
+\end{center}
+
+\vspace{1cm}
+
+\begin{center}
+Caracas - Venezuela\\ Enero/2018
+\end{center}
+
+\newpage
+
+\SweaveInput{1intro.Rnw}
+\SweaveInput{2antecedentesymotivacion.Rnw}
+\SweaveInput{3metodologia.Rnw}
+\SweaveInput{4cronograma.Rnw}
+\SweaveInput{5bib.Rnw}
+
+\end{document}

@@ -1,0 +1,25 @@
+% !Rnw root = 0anteproyecto.Rnw
+
+\newpage
+
+\section{Antecedentes y Motivación}
+
+La inmunización es una técnica de gestión pasiva de carteras de renta fija, desarrollada a partir del concepto de duración, que permite a un inversor estar relativamente seguro de poder hacer frente a una determinada corriente de pagos en el futuro.
+
+La innmunización busca lograr un equilibrio entre los dos efectos contrapuestos de reinversión y precio, de manera que desplazamientos de la curva de tipos de interés no den lugar a la obtención de rendimientos inferiores a la rentabilidad inicialmente ofrecida por el mercado.
+
+F.M. Reddington definió inmunización, en 1952, como la inversión de los activos de tal manera que la misma este inmune ante cambios generales en las tasas de interés.
+
+Lawrence Fisher and Roman Weil, la definieron como: un portafolio de inversiones está inmunizado por un período definido, si su valor al final del período, independientemente de la dirección de las tasas de interés durante el período de inversión, debe ser al menos tan grande como hubiera sido si las tasas de interés hubiesen sido constantes durante el período de tenencia.
+
+Fisher y Weil, demostraron que para lograr el resultado de inmunización, el promedio de la duración de la cartera de obligaciones debe ser igual al tiempo restante en la planificación; y el valor de mercado de los activos debe ser mayor o igual que el valor presente de los pasivos descontados a la tasa interna de rentabilidad de la cartera.
+
+La inmunización busca compensar o igualar las ganancias de una parte con las pérdidas de otra, para proteger la cartera de inversión a las variaciones de los tipos de interés. Sin embargo, hay que aclarar, que la inmunización no garantiza la obtención como mínimo, del rendimiento que se esperaba al momento de la conformación del portafolio, sino que trata de buscar una cartera cuya sensibilidad a las variaciones de los tipos de interés sea mínima.
+
+La inmunización clásica se basa en que los cambios de las tasas de interés se mueven de forma paralela, y en caso de no ser así se tendrá un comportamiento diferente, afectando así la inmunización de la cartera, pudiendo obtener rendimientos más bajos que los esperados. Cuando los cambios son paralelos unas medidas eficientes son la duración y la convexidad y en casos cuando estos no son paralelos Balbás e Ibañez, propusieron la medida Ñ para obtener una inmunización y Fong y Vasicek, propusieron la medida M-Cuadrado $M^2$.
+
+En Venezuela los principales bonos públicos del estado venezolano en el mercado de valores son los siguientes: letras del tesoro, bonos de deuda pública nacional, bonos del sur, bonos soberanos, bonos globales, bonos de PDVSA, euro bonos, bonos venezolanos, vebonos, bonos globales, bonos brady, bonos cero cupón, entre otros. 
+
+En este proyecto de invertigación buscamos generar carteras con bonos Soberanos y de PDVSA, denominados en dólares, con el objetivo de aplicar las medidas de inmunización, y con ello generar carteras inmunes a los cambios en los tipos de interés.
+
+

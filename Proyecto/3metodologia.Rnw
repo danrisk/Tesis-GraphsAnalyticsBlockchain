@@ -1,0 +1,276 @@
+% !Rnw root = 0anteproyecto.Rnw
+
+\newpage
+
+\section{Metodología}
+
+Lo primero que se realizará es una exploración sobre los conceptos relacionados a los bonos, características, clasificación y la forma en que podemos medir los riesgos asociados para invertir en ellos, seguidamente estudiaremos de manera detallada, con un desarrollo matemático, las medidas utilizadas para realizar la inmunización de una cartera, generando algoritmos para aplicar su uso.
+
+Seguidamente recolectaremos datos históricos del mercado Venezolano, en específico los precios de los bonos Soberanos y de PDVSA, para crear con ellos carteras y aplicar los algoritmos para lograr una inmunización y así poder generar estrategias eficientes de inversión, es decir, aquellas que nos garanticen un rendimiento en un horizonte planificado.
+
+Finalmente vamos a generar una aplicación Web interactiva en donde se puedan aplicar las medidas para obtener una cartera inmunizada.
+
+Con este proyecto se busca una documentación detallada, con rigurosidad matemática, sobre inmunización de cateras compuestas por bonos Venezolanos, aplicando medidas como la duración, convexidad, Ñ y $M^2$.
+
+\section{Definiciones Básicas}
+
+En esta sección definiremos las medidas que se usaran para realizar la inmunización de una cartera de bonos.
+
+\subsection{Precio de un Bono}
+
+El precio de un bono, con vencimiento en el tiempo $n$, viene definido por la fórmula 
+
+$$\textrm{Precio} =  \sum_{t=1}^n \frac{\textrm{Cupon}_t}{(1+\textrm{rendimiento})^t} + \frac{\textrm{Nominal}}{(1+\textrm{rendimiento})^n}$$
+
+Sea $P$ el precio de un bono, los cupones pagados en un tiempo $i$-ésimo por $C_i$ donde $i=1,...,n$, la tasa de interés del mercado o rendimiento por $r$ y el valor nominal por $N$. De modo que:
+
+$$P =  \sum_{t=1}^n \frac{C_t}{(1+r)^t} + \frac{N}{(1+r)^n}$$
+
+En el caso de tener un bono cupón cero, los flujos de caja, o mejor dicho el pago de los cupones en todo tiempo serían cero, ya que estos bonos tienen un único pago al vencimiento y es el valor del nominal.
+
+$$P = \frac{N}{(1+r)^n}$$
+
+\textbf{Ejemplo:}
+
+Supongamos que tenemos un bono con valor nominal de 1000 dólares, con un tiempo de vencimiento de tres años y una tasa cupón de 7\% y que actualmente en el mercado éste tiene un rendimiento de 3\%, calculemos su precio usando la fórmula anterior.
+
+Por los datos tenemos $N=1000$, $C_t=1000\times 0.07=$ para $t=1,2,3$, $r=0.03$ y $n=3$, entonces el precio nos queda
+
+$$
+\begin{array}{rl}
+\vspace{3mm} P & = \displaystyle \sum_{t=1}^3 \frac{70}{(1+0.03)^t} + \frac{1000}{(1+0.03)^3}\\
+\vspace{3mm} & = \displaystyle \frac{70}{(1+0.03)^1} + \frac{70}{(1+0.03)^2} + \frac{70}{(1+0.03)^3} + \frac{1000}{(1+0.03)^3}\\
+\vspace{3mm} & = \displaystyle \frac{70}{(1.03)^1} + \frac{70}{(1.03)^2} + \frac{70}{(1.03)^3} + \frac{1000}{(1.03)^3}\\
+\vspace{3mm} & = 67.96117+65.98171+64.05992+915.1417\\
+P & = 1113.145
+\end{array}
+$$
+
+Obtenemos que el precio del bono en el mercado sería de 1113.145 dólares.
+
+\subsection{Duración}
+
+A la hora de hacer la inversión en un bono, se estaría interesado en saber el valor futuro de dicho bono, y este valor puede variar si las tasas de interés en el mercado cambian, llevando a un valor superior o quizas inferior que el precio del momento cuando se adquier el bono. Una medida de la sensibilidad del precio, o variación del precio a cambios en las tasas de interés es la duración.
+
+F. Macaulay (1938) definió \textbf{la duración} como, ``un número único para cada bono que resume todos los factores que afectan la sensibilidad del precio del bono ante cambios en la tasa de interés", la duración es entonces una medida ponderada de los flujos o pagos de cupones de un bono, ésta coincide con la primera derivada del precio en función de las tasas de interés dividida entre el precio.
+
+Si calculamos la primera derivada del precio en relación a las tasas de interés nos queda:
+
+$$
+\begin{array}{rl}
+\vspace{3mm} \displaystyle \frac{dP}{dr} & = \displaystyle \frac{d}{dr}\left( \frac{C_1}{(1+r)^1} + \frac{C_2}{(1+r)^2} + ... + \frac{C_n}{(1+r)^n} + \frac{N}{(1+r)^n} \right)\\
+\vspace{3mm} & = \displaystyle\frac{d}{dr}\left( C_1(1+r)^{-1} + C_2(1+r)^{-2} + ... + C_n(1+r)^{-n}+ N(1+r)^{-n} \right)\\
+\vspace{3mm} & = \displaystyle \frac{d}{dr}(C_1(1+r)^{-1}) + \frac{d}{dr}(C_2(1+r)^{-2}) + ... + \frac{d}{dr}(C_n(1+r)^{-n})+\\
+\vspace{3mm} & \displaystyle \quad + \frac{d}{dr}(C_t(1+r)^{-n})\\
+\vspace{3mm} & = (-1)C_1(1+r)^{-1-1} + (-2)C_2(1+r)^{-2-1} + ... + (-n)C_n(1+r)^{-n-1}+\\
+\vspace{3mm} & \quad + (-n)N(1+r)^{-n-1}\\
+\vspace{3mm} & = (-1)C_1(1+r)^{-2} + (-2)C_2(1+r)^{-3} + ... + (-n)C_n(1+r)^{-(n+1)}+\\
+\vspace{3mm} & \quad + (-n)C_n(1+r)^{-(n+1)}\\
+\vspace{3mm} & = \displaystyle \frac{(-1)C_1}{(1+r)^{2}} + \frac{(-2)C_2}{(1+r)^{3}} + ... + \frac{(-n)C_n}{(1+r)^{n+1}}+ \frac{(-n)N}{(1+r)^{n+1}}\\
+\vspace{3mm} & = \displaystyle \frac{1}{1+r}\frac{(-1)C_1}{(1+r)} + \frac{1}{1+r}\frac{(-2)C_2}{(1+r)^{2}} + ... +\frac{1}{1+r} \frac{(-n)C_n}{(1+r)^{n}}+\frac{1}{1+r} \frac{(-n)N}{(1+r)^{n}}\\
+\displaystyle \frac{dP}{dr} & = \displaystyle -\frac{1}{1+r}\left[\frac{(1)C_1}{(1+r)} + \frac{(2)C_2}{(1+r)^{2}} +...+\frac{(n)C_n}{(1+r)^{n}}+\frac{(n)N}{(1+r)^{n}} \right]
+\end{array}
+$$
+
+Dividiendo esta última expresión entre el precio nos queda:
+
+$$
+\begin{array}{rl}
+\vspace{3mm} \displaystyle \frac{1}{P}\frac{dP}{dr} & = \displaystyle-\frac{1}{P}\frac{1}{1+r}\left[\frac{(1)C_1}{(1+r)} + \frac{(2)C_2}{(1+r)^{2}} +...+\frac{(n)C_t}{(1+r)^{n}}+\frac{(n)N}{(1+r)^{n}} \right]\\
+\displaystyle \frac{1}{P}\frac{dP}{dr} & = \displaystyle-\frac{1}{1+r}\left[\frac{ \displaystyle  \frac{(1)C_1}{(1+r)} + \frac{(2)C_2}{(1+r)^{2}} +...+\frac{(n)C_t}{(1+r)^{n}}+\frac{(n)N}{(1+r)^{n}}}{P} \right]
+\end{array}
+$$
+
+La expresión que tenemos dentro del parentesis nos dice el tiempo en que se recuperará el dinero invertido,  Freddy Macaulay (1938) la llamó \textbf{duración} y la definió como la media ponderada del tiempo que cada flujo (Cupones y Nominal) tiene en el bono. La ecuación de Macaulay calcula el valor actual de cada uno de los flujos de caja y los pondera por el tiempo hasta el vencimiento, la denotaremos por $D_{mac}$, es decir:
+
+$$
+\begin{array}{rl}
+\vspace{3mm} D_{mac} & = \frac{ \displaystyle  \frac{(1)C_1}{(1+r)} + \frac{(2)C_2}{(1+r)^{2}} +...+\frac{(n)C_t}{(1+r)^{n}}+\frac{(n)N}{(1+r)^{n}}}{P}\\
+D_{mac} & = \displaystyle \frac{\displaystyle \sum_{t=1}^n \frac{(t) C_t}{(1+r)^t}}{P}+\frac{\displaystyle \frac{(n)N}{(1+r)^n}}{P}
+\end{array}
+$$
+
+\textbf{Ejemplo:}
+
+Calculemos la duración del bono utilizado en el ejemplo anterior
+
+$$
+\begin{array}{rl}
+\vspace{3mm} D_{mac} & = \displaystyle \frac{\displaystyle \sum_{t=1}^3 \frac{(t) 70}{(1+0.03)^t}}{1113.145}+\frac{\displaystyle \frac{(3)1000}{(1+0.03)^3}}{1113.145}\\
+\vspace{3mm} & = \displaystyle \frac{1}{1113.145} \left( \frac{(1) 70}{(1+0.03)^1}+\frac{(2) 70}{(1+0.03)^2}+\frac{(3) 70}{(1+0.03)^3}+\frac{(3)1000}{(1+0.03)^3}\right)\\
+\vspace{3mm} & = \displaystyle \frac{1}{1113.145} \left( \frac{70}{(1.03)^1}+\frac{140}{(1.03)^2}+\frac{210}{(1.03)^3}+\frac{3000}{(1.03)^3}\right)\\
+\vspace{3mm} & = \displaystyle \frac{1}{1113.145} ( 67.96117+131.9634+192.1797+2745.425)\\
+\vspace{3mm} & = \displaystyle \frac{3137.529}{1113.145}\\
+D_{mac} & = 2.818617
+\end{array}
+$$
+
+En 2.818617 años la reinversión de los flujos de caja compensa la variación en el precio del mismo.
+
+\subsection{Convexidad}
+
+La \textbf{Convexidad} se define como la segunda derivada del precio con respecto al rendimiento dividido entre el precio del bono, al hacer esto se tiene la aproximación de cambios en el precio de un bono cuando las tasas de rendimiento son mayores.
+
+Calculemos la segunda derivada de la variación del precio con respecto a cambios en las tasas de rendimiento.
+
+$$
+\begin{array}{rl}
+\vspace{3mm} \displaystyle \frac{d^2P}{dr^2} & = \displaystyle \frac{dP}{dr}\left[-\frac{1}{1+r}\left(\frac{(1)C_1}{(1+r)} + \frac{(2)C_2}{(1+r)^{2}} +...+\frac{(n)C_n}{(1+r)^{n}}+\frac{(n)N}{(1+r)^{n}} \right)\right]\\
+\vspace{3mm} & = \displaystyle \frac{dP}{dr}\left[-(1)C_1(1+r)^{-2} - (2)C_2(1+r)^{-3} -...- (n)C_n(1+r)^{-(n+1)}\right.\\
+\vspace{3mm} & \quad -\left. (n)N(1+r)^{-(n+1)}\right]\\
+\vspace{3mm} & = \displaystyle \frac{dP}{dr}(-(1)C_1(1+r)^{-2}) + \frac{dP}{dr}(-(2)C_2(1+r)^{-3})+ ... \\
+\vspace{3mm} & \quad \displaystyle \frac{dP}{dr}( -(n)C_n(1+r)^{-(n+1)})+\frac{dP}{dr}( -(n)N(1+r)^{-(n+1)})\\
+\vspace{3mm} & = -(1)(-2)C_1(1+r)^{-2-1} -(2)(-3)C_2(1+r)^{-3-1} - ... \\
+& \quad -(n)(-(n+1))C_n(1+r)^{-(n+1)-1}-(n)(-(n+1))N(1+r)^{-(n+1)-1}\\
+\vspace{3mm} & = (1)(2)C_1(1+r)^{-3} +(2)(3)C_2(1+r)^{-4} + ... +(n)(n+1)C_n(1+r)^{-(n+2)}\\
+\vspace{3mm} & \quad +(n)(n+1)N(1+r)^{-(n+2)}\\
+\vspace{3mm} & = \displaystyle \frac{(1)(2)C_1}{(1+r)^{3}} +\frac{(2)(3)C_2}{(1+r)^{4}} + ... +\frac{(n)(n+1)C_n}{(1+r)^{n+2}}+\frac{(n)(n+1)N}{(1+r)^{n+2}}\\
+\displaystyle \frac{d^2P}{dr^2} & = \displaystyle  \frac{1}{(1+r)^2}\left[ \frac{(1)(2)C_1}{(1+r)} +\frac{(2)(3)C_2}{(1+r)^{2}} + ... +\frac{(n)(n+1)C_n}{(1+r)^{n}}+\frac{(n)(n+1)N}{(1+r)^{n}}\right]
+\end{array}
+$$
+
+Dividiendo entre el precio nos queda:
+
+$$
+\begin{array}{rl}
+\vspace{3mm} \displaystyle \frac{1}{P}\frac{d^2P}{dr^2} & = \displaystyle \frac{1}{(1+r)^2}\frac{1}{P}\left[ \frac{(1)(2)C_1}{(1+r)} +\frac{(2)(3)C_2}{(1+r)^{2}} + ... +\frac{(n)(n+1)C_n}{(1+r)^{n}}+\frac{(n)(n+1)N}{(1+r)^{n}}\right]\\
+\vspace{3mm} \displaystyle \frac{1}{P}\frac{d^2P}{dr^2} & = \displaystyle \frac{1}{(1+r)^2}\frac{1}{P}\left[ \sum_{t=1}^n \frac{(t)(t+1)C_t}{(1+r)^t} +\frac{(n)(n+1)N}{(1+r)^{n}}\right]
+\end{array}
+$$
+
+Obtenemos la definición de convexidad, es decir
+
+$$\textrm{Convexidad} = \frac{1}{P}\frac{d^2P}{dr^2}=\displaystyle \frac{1}{(1+r)^2}\frac{1}{P}\left[ \sum_{t=1}^n \frac{(t)(t+1)C_t}{(1+r)^t} +\frac{(n)(n+1)N}{(1+r)^{n}}\right]$$
+
+\textbf{Ejemplo:}
+
+Calculemos el valor de la convexidad de un bono que tiene un tiempo de vencimiento de 4 años, una tasa cupón de 3\% un rendimiento de 10\% y un valor nominal de 1000 dólares.
+
+Con estos datos tenemos $N=1000$, $C_t=1000\times 0.03=30$ para $t=1,2,3,4$, $r=0.10$ y $n=4$.
+
+Primero calculemos el precio de este bono
+
+$$
+\begin{array}{rl}
+\vspace{3mm} P & = \displaystyle \sum_{t=1}^4 \frac{30}{(1+0.10)^t} + \frac{1000}{(1+0.10)^4}\\
+\vspace{3mm} & = \displaystyle \frac{30}{(1+0.10)^1} +\frac{30}{(1+0.10)^2}+\frac{30}{(1+0.10)^3}+\frac{30}{(1+0.10)^4} + \frac{1000}{(1+0.10)^4}\\
+\vspace{3mm} & = \displaystyle \frac{30}{(1.10)^1} +\frac{30}{(1.10)^2}+\frac{30}{(1.10)^3}+\frac{30}{(1.10)^4} + \frac{1000}{(1.10)^4}\\
+\vspace{3mm} & = 27.27273 +24.79339+22.53944+20.4904 + 683.0135\\
+P & = 778.1095
+\end{array}
+$$
+
+Entonces 
+
+$$
+\begin{array}{rl}
+\vspace{3mm} \text{Convexidad} & = \displaystyle \frac{1}{(1+r)^2}\frac{1}{P}\left[ \sum_{t=1}^n \frac{(t)(t+1)C_t}{(1+r)^t} +\frac{(n)(n+1)N}{(1+r)^{n}}\right]\\
+\vspace{3mm} & = \displaystyle \frac{1}{(1+0.10)^2}\frac{1}{778.1095}\left[ \sum_{t=1}^4 \frac{(t)(t+1)30}{(1+0.10)^t} +\frac{(4)(5)1000}{(1+0.10)^{4}}\right]\\
+\vspace{3mm} & = \displaystyle \frac{1}{(1.10)^2}\frac{1}{778.1095}\left[ \sum_{t=1}^4 \frac{(t)(t+1)30}{(1.10)^t} +\frac{20000}{(1.10)^{4}}\right]\\
+\vspace{3mm} & = \displaystyle \frac{1}{(1.10)^2}\frac{1}{778.1095}\left[ \frac{(1)(2)30}{(1.10)^1}+\frac{(2)(3)30}{(1.10)^2}+\frac{(3)(4)30}{(1.10)^3} +\frac{(4)(5)30}{(1.10)^4} +\frac{20000}{(1.10)^{4}}\right]\\
+\vspace{3mm} & = \displaystyle \frac{1}{1.21}\frac{1}{778.1095}\left[ \frac{60}{1.10}+\frac{180}{1.21}+\frac{36}{1.331} +\frac{600}{1.4641} +\frac{20000}{1.4641}\right]\\
+\vspace{3mm} & = \displaystyle \frac{1}{1.21}\frac{1}{778.1095}\left[ \frac{60}{1.10}+\frac{180}{1.21}+\frac{36}{1.331}+\frac{600}{1.4641} +\frac{20000}{1.4641}\right]\\
+\vspace{3mm} & = \displaystyle \frac{1}{941.5125}[ 54.54545+148.7603+27.04733+409.8081 +13660.27]\\
+\vspace{3mm} & = \displaystyle \frac{14300.43}{941.5125}\\
+\text{Convexidad} & = 15.18878
+\end{array}
+$$
+
+La convexidad es una medida de segundo orden, ante bonos con igual duración, el de mayor convexidad será el que mayor beneficio aporte al inversor ante el riesgo de tipos de interés.
+
+\section{Medida $M^2$}
+
+Gifford Fong and Oldrich A. Vasicek en su artículo ``A Risk Minimizing Strategy for Portfolio Immunization"\ define la medida de dispersión $M^2$, para ello suponen que los intereses tienen un cambio de $i(t)$ a $i'(t)=i(t)+\Delta i(t)$ donde $\Delta i(t)$ es una función arbitraria y $\displaystyle \frac{d \Delta i (t)}{dt}\le K$ para todo $t\ge0$, dado esto encuentran una cota inferior a los cambios de los precios de la cartera en el horizonte que depende de dos término uno es $-\frac{1}{2}K$ y el otro es la medida de dispersión
+
+$$M^2=\displaystyle \sum_{j=1}^m (j-H)^2C_j\frac{P_0(j)}{I_0}$$
+
+Donde:
+
+- $m$ corresponde al tiempo de mayor duración de los instrumentos que tiene la cartera.
+
+- $C_j$ corresponde al flujo de caja en el tiempo $j$.
+
+- $H$ es el horizonte de inversión.
+
+- $P_0(j)$ es una función de descuento presente en el tiempo $j$.
+
+- $I_0$ es el precio de inversión al momento de adquirirla.
+
+- $S_j$ es el tiempo cuando ocurren los flujos de caja.
+
+Esta definición de $M^2$ es muy similar a la definición de duración de Macaulay, y se puede ver como una suma ponderada de las varianzas sobre la fecha del horizonte.
+
+Si los pagos de los flujos ocurren cerca de la fecha horizonte entonces $M^2$ es bajo, ahora si estos están distribuidos en el tiempo como pasa con las carteras que están compuestas por bonos de corto y largo plazo entonces $M^2$ será muy grande. En el caso de que la cartera esté completamente inmunizada $M^2$ será igual a cero. Esto únicamente ocurrirá cuando la cartera está conformada por bonos cero cupón con vencimientos al final del horizonte de inversión, en este caso el riesgo de inmunización es nulo.
+
+$M^2$ consigue su valor más pequeño cuando la cartera está compuesta por un único bono con igual vencimiento que el horizonte, entonces esta medida nos dice cuan distante está nuestra cartera de inversión de una cartera compuesta por un único bono.
+
+\textbf{Ejemplo:}
+
+Vamos a suponer que conocemos el valor inicial del precio de la cartera $I_0=P$, el horizonte de inversión $H$, que los flujos de caja $C_j$ son anuales y que la función de descuento presente es $\frac{1}{(1+r)^t}$ para el tiempo $t$ donde $r$ es el rendimiento. Entonces 
+
+$$
+\begin{array}{rl}
+M^2& = \displaystyle \frac{\sum_{j=1}^m C_j P_0(S_j)(j-H)^2}{I_0}\\
+& = \displaystyle \frac{\sum_{j=1}^m C_j \frac{1}{(1+r)^j}(j-H)^2}{P}\\
+M^2 & = \displaystyle \frac{1}{P}\sum_{j=1}^m \frac{C_j(j-H)^2}{(1+r)^j}
+\end{array}
+$$
+
+En las carteras de inversión $m$ es el tiempo de vencimiento del instrumento con mayor tiempo de vencimiento, ya que después del último pago correspondiente al horizonte se deben vender los bonos y este precio de venta depende de los flujos de caja que le queden y del pago del nominal.
+
+Supongamos que dentro de cinco años se debe realizar un pago de 1.000.000 de dólares, para ello va invertir 680.583 dólares en una cartera que consta de los siguientes dos bonos
+
+- Un bono del estado a tres años, al 8\% de interés.
+
+- Una obligación del estado que paga 7\% de interés a la que le quedan 10 años de vida.
+
+Supongamos además que se va invertir 52\% del total a invertir (es decir $680.583\times 0.52=353.9032$ dólares) en el primer bono y 48\% (es decir $680.583\times 0.48=326.6798$ dólares) en la obligación. Nuestro horizonte de inversión es de 5 años. Supondremos un rendimiento hasta el vencimiento de 8\%.
+
+Los pagos de cupones del bono son a una tasa de interés de 8\%, suponiendo que estos pagos son anuales, serán entonces $353.9032\times 0.08=28.31226$ dólares los primeros dos años y el último pago de ese bono será el nominal de dicho bono más el cupón $353.9032+28.31226= 382.2155$
+
+Con respecto a la obligación los 5 pagos coincidirán con los pagos de cupones de dicha obligación, ya que el vencimiento del mismo ocurriría cinco años después, y como la tasa de interés de éste es de 7\% tenemos que los pagos de cupones son $326.6798\times 0.07=22.86759$, en el quinto año se venderá y para ello tenemos que calcular el precio de venta, éste dependerá de los pagos que queden y del pago del nominal, por lo tanto el último pago de éste será $326.6798+22.86759=349.5474$
+
+En la siguiente tabla presentaremos los flujos de caja de cada bono y los flujos de caja de la cartera de inversión
+
+\begin{table}[]
+\centering
+\begin{tabular}{cccc} 
+\textbf{Año} & \textbf{Bono} & \textbf{Obligación} & \textbf{Flujo de Caja} \\
+1            & 28.31226      & 22.86759            & 51.17985               \\
+2            & 28.31226      & 22.86759            & 51.17985               \\
+3            & 382.2155      & 22.86759            & 405.0831               \\
+4            &               & 22.86759            & 22.86759               \\
+5            &               & 22.86759            & 22.86759               \\
+6            &               & 22.86759            & 22.86759               \\
+7            &               & 22.86759            & 22.86759               \\
+8            &               & 22.86759            & 22.86759               \\
+9            &               & 22.86759            & 22.86759               \\ 
+10           &               & 349.5474            & 349.5474              
+\end{tabular}
+\end{table}
+
+Con estos resultados calculemos el riesgo de inmunización ($M^2$)
+
+$$
+\begin{array}{rl}
+M^2 & = \displaystyle \frac{1}{P}\sum_{j=1}^m \frac{C_j(H-S_j)^2}{(1+r)^j}\\
+& = \displaystyle \frac{1}{680.583}\sum_{j=1}^{10}\frac{C_j (j-5)^2}{(1 + 0.08)^j}\\
+& = \displaystyle \frac{1}{680.583} \left[ \frac{51.17985(1-5)^2}{(1.08)^1}+...+ \frac{349.5474(10-5)^2}{(1.08)^{10}}\right]\\
+& = \displaystyle \frac{1}{680.583} \left[ 758.22 + ... + 4047.702\right]\\
+& = \displaystyle \frac{6865.915}{680.583}\\
+M^2 &= 10.08828
+\end{array}
+$$
+
+\section{Medida $\tilde{N}$}
+
+Supongamos que el valor presente del cupón viene dada por
+
+$$c(t,0)=c(t)e^{ -\int_{0}^t g(s)ds}$$
+
+$H$ un horizonte planificado de una inversión y $C$ es el capital invertido, 
+
+la medida de dispersión $\tilde{N}$ se define como
+
+$$\tilde{N}=\int_{0}^T \frac{c(t,0)}{C}|t-H|dt$$
+
