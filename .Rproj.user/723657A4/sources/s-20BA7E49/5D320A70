@@ -1,0 +1,25 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541375157236.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "0",
+    "id" : "5D320A70",
+    "lastKnownWriteTime" : 1540929162,
+    "last_content_update" : 1540929162,
+    "path" : "~/Documents/GraphsBlockchain/Proyecto/1intro.Rnw",
+    "project_path" : "Proyecto/1intro.Rnw",
+    "properties" : {
+        "cursorPosition" : "4,82",
+        "scrollLine" : "0"
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 2,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "sweave"
+}

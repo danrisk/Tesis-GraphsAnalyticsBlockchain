@@ -1,0 +1,23 @@
+{
+    "collab_server" : "",
+    "contents" : "",
+    "created" : 1541375092372.000,
+    "dirty" : false,
+    "encoding" : "UTF-8",
+    "folds" : "",
+    "hash" : "4000447882",
+    "id" : "863E63FE",
+    "lastKnownWriteTime" : 1540912464,
+    "last_content_update" : 1540912464,
+    "path" : "~/Documents/GraphsBlockchain/Proyecto/proyecto.Rnw",
+    "project_path" : "Proyecto/proyecto.Rnw",
+    "properties" : {
+    },
+    "read_only" : false,
+    "read_only_alternatives" : [
+    ],
+    "relative_order" : 1,
+    "source_on_save" : false,
+    "source_window" : "",
+    "type" : "sweave"
+}
